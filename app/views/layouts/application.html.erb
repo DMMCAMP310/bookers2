@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="d-flex flex-column vh-100">
+    <header class="bg-dark text-white pt-2 pb-1">
+       <nav class="navbar navbar-expand-lg navbar-light">
+         <div class="container">
+          <a class="navbar-brand p-3" href="/">
+            <span>Bookers</span>
+          </a>
+          
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, class: "#{key}") %>
+          <% end %>
+      <% if user_signed_in? %>
+        <button>
+          <i class="fas fa-home"></i><%= link_to "Home", user_path(current_user.id) %>
+        </button>
+        <button>
+          <i class="fas fa-users"></i><%= link_to "User", users_path %>
+        </button>
+        <button>
+          <i class="fas fa-book-open"></i><%= link_to "Books", books_path %>
+        </button>
+        <button>
+          <i class="fas fa-sign-out-alt"></i><%= link_to "Log out", destroy_user_session_path, method: :delete %>
+        </button>
+      <% else %>
+        <button>
+          <i class="fas fa-home"></i><%= link_to "Home", root_path %>
+        </button>
+        <button>
+          <i class="fas fa-link"></i><%= link_to "About", about_path %>
+        </button>
+        <button>
+          <i class="fas fa-user-plus"></i><%= link_to "Sign up", new_user_registration_path %>
+        </button>
+        <button>
+          <i class="fas fa-sign-in-alt"></i><%= link_to "Logn in", new_user_session_path %>
+        </button>
+      <% end %>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+    <%= yield %>
+    </main>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
