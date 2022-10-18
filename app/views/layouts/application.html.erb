@@ -14,39 +14,56 @@
     <header class="bg-dark text-white pt-2 pb-1">
        <nav class="navbar navbar-expand-lg navbar-light">
          <div class="container">
-          <a class="navbar-brand p-3" href="/">
-            <span>Bookers</span>
-          </a>
-          
+
           <% flash.each do |key, value| %>
             <%= content_tag(:div, value, class: "#{key}") %>
           <% end %>
+          <a class="navbar-brand p-3 text-light" href="/">Bookers</a>
       <% if user_signed_in? %>
-        <button>
-          <i class="fas fa-home"></i><%= link_to "Home", user_path(current_user.id) %>
+
+        <click_button class="text-light">
+          <%= link_to user_path(current_user.id) do %>
+            <i class="fas fa-home"></i>Homes
+          <% end %>
         </button>
-        <button>
-          <i class="fas fa-users"></i><%= link_to "User", users_path %>
+        <click_button class="text-light">
+          <%= link_to users_path do %>
+            <i class="fas fa-users"></i>Users
+          <% end %>
         </button>
-        <button>
-          <i class="fas fa-book-open"></i><%= link_to "Books", books_path %>
+        <click_button class="text-light">
+          <%= link_to books_path do %>
+            <i class="fas fa-book-open"></i>Books
+          <% end %>
         </button>
-        <button>
-          <i class="fas fa-sign-out-alt"></i><%= link_to "Log out", destroy_user_session_path, method: :delete %>
+        <click_button class="text-light">
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fas fa-sign-out-alt"></i>Log out
+          <% end %>
         </button>
       <% else %>
-        <button>
-          <i class="fas fa-home"></i><%= link_to "Home", root_path %>
+        <ul>
+        <li class="text-light">
+          <%= link_to root_path do %>
+            <i class="fas fa-home"></i>Home
+          <% end %>
+        </li>
+        <click_button class="text-light">
+          <%= link_to home_about_path do %>
+            <i class="fas fa-link"></i>About
+          <% end %>
         </button>
-        <button>
-          <i class="fas fa-link"></i><%= link_to "About", about_path %>
+        <click_button class="text-light">
+          <%= link_to new_user_registration_path do %>
+            <i class="fas fa-user-plus"></i>Sign up
+          <% end %>
         </button>
-        <button>
-          <i class="fas fa-user-plus"></i><%= link_to "Sign up", new_user_registration_path %>
+        <click_button class="text-light">
+          <%= link_to new_user_session_path do %>
+            <i class="fas fa-sign-in-alt"></i>Log in
+          <% end %>
         </button>
-        <button>
-          <i class="fas fa-sign-in-alt"></i><%= link_to "Logn in", new_user_session_path %>
-        </button>
+      </ul>
       <% end %>
           </div>
         </div>
